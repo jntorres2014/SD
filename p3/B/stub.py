@@ -18,16 +18,3 @@ class Stub:
        msg = self.client.recv(4096)
        return msg if not type(msg) == bytes else msg.decode()
 
-def main():
-   cliente = Stub('localhost', 8080)
-   cliente.conectar()
-   print("Conectando cliente")
-   while True:
-    #input('Ingrese una S para salir\n')
-    respuesta=cliente.enviar(respuesta)       
-    from_server = cliente.recibir()
-    if from_server.decode() == 's': 
-       break  	
-   cliente.desconectar()
-
-main()
