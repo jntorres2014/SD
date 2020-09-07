@@ -1,4 +1,5 @@
 import socket
+
 class Stub:
    def __init__(self, host='0.0.0.0', port=8080):
        self.host = host
