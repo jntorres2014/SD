@@ -1,4 +1,5 @@
 class Server:
+
     def __init__(self, adapter=None):
         self.adapter= adapter
 
@@ -16,7 +17,9 @@ class Server:
 
     def aceptar (self):
         return self.adapter.aceptar()
+        
     def listen (self):
         self.adapter.listen()
+
     def escuchar(self):
         self.adapter.escuchar()
