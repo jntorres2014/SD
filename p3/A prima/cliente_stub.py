@@ -2,6 +2,7 @@ import grpc
 
 from file_system_pb2 import Path
 from file_system_pb2_grpc import FSStub
+fileManager= {}
 
 class Stub:
 
@@ -19,7 +20,7 @@ class Stub:
         except Exception as e:
             print('Error when openning channel {}'.format(e))
             return False
-
+    
     def disconnect(self):
         self._channel.close()
         self._channel = None
@@ -34,17 +35,17 @@ class Stub:
             return response.values
         return None
 
-    def openFile(path):
+    def open_file(path):
 	try:
 		if path not in file_manager:
 		   archivo= open(path,'r')
 		   self.file_manager[path]= archivo
-
-		return True
+    		return True
 	except Exception as e:
 		print('ERROR!!! ', e)
 		return False
-    def readFile(path):
+    
+    def read_file(path):
 	try:
 		if path in file_manager:
 			datos = file_manager[path].read()
@@ -52,7 +53,8 @@ class Stub:
 	except Exception as e:
 		print('ERROR!!! ', e)
 		return None
-    def closeFile(path):
+
+    def close_file(path):
 	try:
 		if path in file_manager:
 		   file_manager[path].close()

@@ -6,6 +6,7 @@ def main():
     cliente = Client(stub)
     cliente.conectar()
     respuesta = cliente.listar_archivos('.')
+    cliente.leer_archivo('.')
     print(respuesta)
 
 if __name__ == '__main__':

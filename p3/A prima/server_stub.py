@@ -1,8 +1,8 @@
 import grpc
 from concurrent import futures
 import time
-import tqdm
-import os
+#import tqdm
+#import os
 
 import file_system_pb2
 from file_system_pb2_grpc import (
@@ -32,13 +32,14 @@ class StubFSServicer(FSServicer):
             print('ERRR En server list files ', e)
         return response
 
-    def ReadFile (self,path):
+    def ReadFile(self,path):
         if self.is_connected():  
             #Aca estoy tratando de leer el archivo (Siguiendo un ejemplo)
             read_file= file_system_pb2.ReadFile(value=path)
             response = self._adapter.ReadFile(read_file)
             return response.valor
         try:
+            pass
         except Exception as e:
             print('ERRR En server read file ', e)
         return None
@@ -55,9 +56,12 @@ class Stub:
         add_FSServicer_to_server(StubFSServicer(self._adapter), self.server)
         self.server.add_insecure_port('[::]:{}'.format(self._port))
 
+    
     def run(self):
         self._setup()
+        #Falta la definicion del Start
         self.server.start()
+
         try:
             while True:
                 time.sleep(86400)
