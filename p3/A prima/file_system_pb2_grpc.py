@@ -19,12 +19,23 @@ class FSStub(object):
                 request_serializer=file__system__pb2.Path.SerializeToString,
                 response_deserializer=file__system__pb2.PathFiles.FromString,
                 )
+        self.read = channel.unary_unary(
+                '/FS/read',
+                request_serializer=file__system__pb2.Path.SerializeToString,
+                response_deserializer=file__system__pb2.FileData.FromString,
+                )
 
 
 class FSServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def ListFiles(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def read(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_FSServicer_to_server(servicer, server):
                     servicer.ListFiles,
                     request_deserializer=file__system__pb2.Path.FromString,
                     response_serializer=file__system__pb2.PathFiles.SerializeToString,
+            ),
+            'read': grpc.unary_unary_rpc_method_handler(
+                    servicer.read,
+                    request_deserializer=file__system__pb2.Path.FromString,
+                    response_serializer=file__system__pb2.FileData.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,111 +81,6 @@ class FS(object):
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
-
-class OpenFileStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.open = channel.unary_unary(
-                '/OpenFile/open',
-                request_serializer=file__system__pb2.Path.SerializeToString,
-                response_deserializer=file__system__pb2.PathFiles.FromString,
-                )
-
-
-class OpenFileServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def open(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_OpenFileServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'open': grpc.unary_unary_rpc_method_handler(
-                    servicer.open,
-                    request_deserializer=file__system__pb2.Path.FromString,
-                    response_serializer=file__system__pb2.PathFiles.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'OpenFile', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class OpenFile(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def open(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/OpenFile/open',
-            file__system__pb2.Path.SerializeToString,
-            file__system__pb2.PathFiles.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-
-class ReadFileStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.read = channel.unary_unary(
-                '/ReadFile/read',
-                request_serializer=file__system__pb2.Path.SerializeToString,
-                response_deserializer=file__system__pb2.PathFiles.FromString,
-                )
-
-
-class ReadFileServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def read(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_ReadFileServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'read': grpc.unary_unary_rpc_method_handler(
-                    servicer.read,
-                    request_deserializer=file__system__pb2.Path.FromString,
-                    response_serializer=file__system__pb2.PathFiles.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'ReadFile', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class ReadFile(object):
-    """Missing associated documentation comment in .proto file."""
-
     @staticmethod
     def read(request,
             target,
@@ -181,69 +92,8 @@ class ReadFile(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ReadFile/read',
+        return grpc.experimental.unary_unary(request, target, '/FS/read',
             file__system__pb2.Path.SerializeToString,
-            file__system__pb2.PathFiles.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-
-class CloseFileStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.close = channel.unary_unary(
-                '/CloseFile/close',
-                request_serializer=file__system__pb2.Path.SerializeToString,
-                response_deserializer=file__system__pb2.PathFiles.FromString,
-                )
-
-
-class CloseFileServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def close(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_CloseFileServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'close': grpc.unary_unary_rpc_method_handler(
-                    servicer.close,
-                    request_deserializer=file__system__pb2.Path.FromString,
-                    response_serializer=file__system__pb2.PathFiles.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'CloseFile', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class CloseFile(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def close(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CloseFile/close',
-            file__system__pb2.Path.SerializeToString,
-            file__system__pb2.PathFiles.FromString,
+            file__system__pb2.FileData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

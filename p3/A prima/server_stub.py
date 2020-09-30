@@ -1,12 +1,19 @@
 import grpc
 from concurrent import futures
 import time
+import tqdm
+import os
 
 import file_system_pb2
 from file_system_pb2_grpc import (
     add_FSServicer_to_server,
     FSServicer,
 )
+
+
+# receive 4096 bytes each time
+BUFFER_SIZE = 4096
+SEPARATOR = "<SEPARATOR>"
 
 class StubFSServicer(FSServicer):
 
@@ -24,6 +31,17 @@ class StubFSServicer(FSServicer):
         except Exception as e:
             print('ERRR En server list files ', e)
         return response
+
+    def ReadFile (self,path):
+        if self.is_connected():  
+            #Aca estoy tratando de leer el archivo (Siguiendo un ejemplo)
+            read_file= file_system_pb2.ReadFile(value=path)
+            response = self._adapter.ReadFile(read_file)
+            return response.valor
+        try:
+        except Exception as e:
+            print('ERRR En server read file ', e)
+        return None
 
 class Stub:
 

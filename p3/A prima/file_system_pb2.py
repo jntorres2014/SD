@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11\x66ile_system.proto\"\x15\n\x04Path\x12\r\n\x05value\x18\x01 \x01(\t\"\x1b\n\tPathFiles\x12\x0e\n\x06values\x18\x02 \x03(\t2&\n\x02\x46S\x12 \n\tListFiles\x12\x05.Path\x1a\n.PathFiles\"\x00\x32\'\n\x08OpenFile\x12\x1b\n\x04open\x12\x05.Path\x1a\n.PathFiles\"\x00\x32\'\n\x08ReadFile\x12\x1b\n\x04read\x12\x05.Path\x1a\n.PathFiles\"\x00\x32)\n\tCloseFile\x12\x1c\n\x05\x63lose\x12\x05.Path\x1a\n.PathFiles\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x11\x66ile_system.proto\"\x15\n\x04Path\x12\r\n\x05value\x18\x01 \x01(\t\"\x1b\n\tPathFiles\x12\x0e\n\x06values\x18\x02 \x03(\t\"\x18\n\x08\x46ileData\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x32\x42\n\x02\x46S\x12 \n\tListFiles\x12\x05.Path\x1a\n.PathFiles\"\x00\x12\x1a\n\x04read\x12\x05.Path\x1a\t.FileData\"\x00\x62\x06proto3'
 )
 
 
@@ -88,8 +88,41 @@ _PATHFILES = _descriptor.Descriptor(
   serialized_end=71,
 )
 
+
+_FILEDATA = _descriptor.Descriptor(
+  name='FileData',
+  full_name='FileData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='data', full_name='FileData.data', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=73,
+  serialized_end=97,
+)
+
 DESCRIPTOR.message_types_by_name['Path'] = _PATH
 DESCRIPTOR.message_types_by_name['PathFiles'] = _PATHFILES
+DESCRIPTOR.message_types_by_name['FileData'] = _FILEDATA
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Path = _reflection.GeneratedProtocolMessageType('Path', (_message.Message,), {
@@ -106,6 +139,13 @@ PathFiles = _reflection.GeneratedProtocolMessageType('PathFiles', (_message.Mess
   })
 _sym_db.RegisterMessage(PathFiles)
 
+FileData = _reflection.GeneratedProtocolMessageType('FileData', (_message.Message,), {
+  'DESCRIPTOR' : _FILEDATA,
+  '__module__' : 'file_system_pb2'
+  # @@protoc_insertion_point(class_scope:FileData)
+  })
+_sym_db.RegisterMessage(FileData)
+
 
 
 _FS = _descriptor.ServiceDescriptor(
@@ -115,8 +155,8 @@ _FS = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=73,
-  serialized_end=111,
+  serialized_start=99,
+  serialized_end=165,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListFiles',
@@ -128,87 +168,19 @@ _FS = _descriptor.ServiceDescriptor(
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
+  _descriptor.MethodDescriptor(
+    name='read',
+    full_name='FS.read',
+    index=1,
+    containing_service=None,
+    input_type=_PATH,
+    output_type=_FILEDATA,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
 ])
 _sym_db.RegisterServiceDescriptor(_FS)
 
 DESCRIPTOR.services_by_name['FS'] = _FS
-
-
-_OPENFILE = _descriptor.ServiceDescriptor(
-  name='OpenFile',
-  full_name='OpenFile',
-  file=DESCRIPTOR,
-  index=1,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=113,
-  serialized_end=152,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='open',
-    full_name='OpenFile.open',
-    index=0,
-    containing_service=None,
-    input_type=_PATH,
-    output_type=_PATHFILES,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_OPENFILE)
-
-DESCRIPTOR.services_by_name['OpenFile'] = _OPENFILE
-
-
-_READFILE = _descriptor.ServiceDescriptor(
-  name='ReadFile',
-  full_name='ReadFile',
-  file=DESCRIPTOR,
-  index=2,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=154,
-  serialized_end=193,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='read',
-    full_name='ReadFile.read',
-    index=0,
-    containing_service=None,
-    input_type=_PATH,
-    output_type=_PATHFILES,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_READFILE)
-
-DESCRIPTOR.services_by_name['ReadFile'] = _READFILE
-
-
-_CLOSEFILE = _descriptor.ServiceDescriptor(
-  name='CloseFile',
-  full_name='CloseFile',
-  file=DESCRIPTOR,
-  index=3,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=195,
-  serialized_end=236,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='close',
-    full_name='CloseFile.close',
-    index=0,
-    containing_service=None,
-    input_type=_PATH,
-    output_type=_PATHFILES,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_CLOSEFILE)
-
-DESCRIPTOR.services_by_name['CloseFile'] = _CLOSEFILE
 
 # @@protoc_insertion_point(module_scope)

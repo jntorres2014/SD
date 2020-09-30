@@ -5,21 +5,12 @@ string value = 1 ;
 message PathFiles {
 repeated string values = 2 ;
 }
+message FileData {
+bytes data = 1;
+}
 service FS {
 rpc ListFiles(Path) returns (PathFiles){};
+
+rpc read(Path) returns (FileData) {};
 }
 
-service OpenFile {
-rpc open (Path) 
-returns (PathFiles) {};
-}
-
-service ReadFile { 
-rpc read(Path)
-returns (PathFiles) {};
-}
-service CloseFile {
-
-rpc close(Path)
-returns (PathFiles) {};
-}
