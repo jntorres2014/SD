@@ -6,10 +6,12 @@ def main():
     stub = Stub('localhost', '50051')
     cliente = Client(stub)
     cliente.conectar()
-    pdb.set_trace()
-    respuesta = cliente.listar_archivos('/home/jony/Descargas/Universidad/Sistemas Distribuidos/SD/p3/A prima/')
-    cliente.leer_archivo('/home/jony/Descargas/Universidad/Sistemas Distribuidos/SD/p3/A prima/')
+    #pdb.set_trace()
+    respuesta = cliente.listar_archivos('.')
     print(respuesta)
+    archivo=cliente.abrir_archivo('prueba.txt')
+    cliente.leer_archivo(archivo)
+
     pdb.set_trace()
 if __name__ == '__main__':
     main()

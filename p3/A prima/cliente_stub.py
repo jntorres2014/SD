@@ -29,11 +29,11 @@ class Stub:
         return self._channel
 
     def list_files(self, path):
-        pdb.set_trace()
+        #pdb.set_trace()
         if self.is_connected():
             path = Path(value = path)
             response = self._stub.ListFiles(path)
-            pdb.set_trace()
+            #pdb.set_trace()
             print (response)
             return response.values
         return None

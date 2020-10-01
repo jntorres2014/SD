@@ -52,10 +52,10 @@ class Stub:
 
 
     def run(self):
-        pdb.set_trace()
+        #pdb.set_trace()
         self._setup()
         #falta Start
-        pdb.set_trace()
+
         self.server.start()
         #pdb.set_trace() 
         try:
