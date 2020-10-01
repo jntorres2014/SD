@@ -1,19 +1,13 @@
 import grpc
 from concurrent import futures
 import time
-#import tqdm
-#import os
+import pdb
 
 import file_system_pb2
 from file_system_pb2_grpc import (
     add_FSServicer_to_server,
     FSServicer,
 )
-
-
-# receive 4096 bytes each time
-BUFFER_SIZE = 4096
-SEPARATOR = "<SEPARATOR>"
 
 class StubFSServicer(FSServicer):
 
@@ -56,12 +50,14 @@ class Stub:
         add_FSServicer_to_server(StubFSServicer(self._adapter), self.server)
         self.server.add_insecure_port('[::]:{}'.format(self._port))
 
-    
-    def run(self):
-        self._setup()
-        #Falta la definicion del Start
-        self.server.start()
 
+    def run(self):
+        pdb.set_trace()
+        self._setup()
+        #falta Start
+        pdb.set_trace()
+        self.server.start()
+        #pdb.set_trace() 
         try:
             while True:
                 time.sleep(86400)

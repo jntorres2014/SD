@@ -7,7 +7,7 @@ class Server:
         self.adapter.conectar()
 
     def desconectar(self):
-        self.adapter.desconecta()
+        self.adapter.desconectar()
 
     def enviar (self, mensaje):
         self.adapter.enviar(mensaje)
@@ -19,7 +19,7 @@ class Server:
         return self.adapter.aceptar()
         
     def listen (self):
-        self.adapter.listen()
+        self.adapter.aceptar()
 
     def escuchar(self):
         self.adapter.escuchar()

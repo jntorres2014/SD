@@ -1,8 +1,8 @@
 import grpc
-
+import pdb
 from file_system_pb2 import Path
 from file_system_pb2_grpc import FSStub
-fileManager= {}
+file_manager= {}
 
 class Stub:
 
@@ -29,37 +29,39 @@ class Stub:
         return self._channel
 
     def list_files(self, path):
+        pdb.set_trace()
         if self.is_connected():
-            path = Path(value=path)
+            path = Path(value = path)
             response = self._stub.ListFiles(path)
+            pdb.set_trace()
+            print (response)
             return response.values
         return None
-
-    def open_file(path):
-	try:
-		if path not in file_manager:
-		   archivo= open(path,'r')
-		   self.file_manager[path]= archivo
-    		return True
-	except Exception as e:
-		print('ERROR!!! ', e)
-		return False
     
-    def read_file(path):
-	try:
-		if path in file_manager:
-			datos = file_manager[path].read()
-		return datos
-	except Exception as e:
-		print('ERROR!!! ', e)
-		return None
 
-    def close_file(path):
-	try:
-		if path in file_manager:
-		   file_manager[path].close()
-		   del file_manager[path]
-		   return true
-	except Exception as e:
-		print('ERROR!!! ', e)
-		return False	
+    def open_file(self,path):
+        if path not in file_manager:
+           archivo= open(path,'r')
+           self.file_manager[path]= archivo
+           return True
+        return False
+    def close_file(self,path):
+        try:
+            if path in file_manager :
+                file_manager[path].close()
+                del file_manager[path]
+                return True
+        except Exception as e:
+            print('ERROR!!! ', e)
+            return False
+    def read_file(self, path):
+        try:
+            if path in file_manager:
+              datos = file_manager[path].read()
+              pdb.set_trace()
+            return datos
+        except Exception as e:
+            print('ERROR!!! ', e)
+            return None
+
+    	

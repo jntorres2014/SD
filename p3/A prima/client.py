@@ -20,6 +20,7 @@ class Client:
     def listar_archivos(self,path):
         return self.adapter.list_files(path)
 
+
     def abrir_archivo(self,path):
         return self.adapter.open_file(path)
 
