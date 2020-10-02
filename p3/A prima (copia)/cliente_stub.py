@@ -29,7 +29,6 @@ class Stub:
         return self._channel
 
     def list_files(self, path):
-        print('listando 1')
         if self.is_connected():
             path = Path(value = path)
             response = self._stub.ListFiles(path)          
@@ -38,12 +37,9 @@ class Stub:
         return None
     
     def read_file(self, path):
-        print('leer 1')
         if self.is_connected():    
             path= Path(value = path)
-            fileData = self._stub.read(path)
-            print('pase')
-            print (fileData)
+            #pdb.set_trace()
+            fileData = self._stub.Read(path)
             return fileData.data
         return None
-

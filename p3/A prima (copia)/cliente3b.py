@@ -10,7 +10,7 @@ def main():
     #respuesta = cliente.listar_archivos('.')
     #print(respuesta)
     archivo=cliente.leer_archivo('prueba.txt')
-
+    #pdb.set_trace()
     print(archivo)
     #cliente.leer_archivo(archivo)
 

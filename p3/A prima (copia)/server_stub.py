@@ -17,8 +17,9 @@ class StubFSServicer(FSServicer):
         FSServicer.__init__(self)
 
     def ListFiles(self, request, context):
+        print(request)
         response = file_system_pb2.PathFiles()
-        print('listando de cliente')
+        print('valor de ')
         try:
             for file in self._adapter.list_files(request.value):
                 response.values.append(file)
@@ -26,15 +27,13 @@ class StubFSServicer(FSServicer):
             print('ERRR En server list files ', e)
         return response
 
-    def read(self,request,context):
-         pdb.set_trace()
-        print (request)
+    def Read(self,request,context):
+        print ('abriendo el archivo. si pude leo') 
         if self._adapter.open_file(request.value):
             response = file_system_pb2.PathFiles()
-            print (response)
-            #Aca estoy tratando de leer el archivo (Siguiendo un ejemplo) 
-            #readfile= file_system_pb2.read_file(value=response)
-            response = self._adapter.read_file(response.path)
+            readfile= file_system_pb2.read_file(response.value)
+            #response = self._adapter.read_file(request.value)
+            print(response)
         return response.valor
         try:
             pass
