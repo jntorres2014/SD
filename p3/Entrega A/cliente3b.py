@@ -11,7 +11,7 @@ def main():
     #print(respuesta)
     archivo=cliente.leer_archivo('prueba.txt')
     #pdb.set_trace()
-    print(archivo)
+    print(archivo.decode())
     #cliente.leer_archivo(archivo)
 
 if __name__ == '__main__':

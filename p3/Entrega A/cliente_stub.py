@@ -38,7 +38,7 @@ class Stub:
     
     def read_file(self, path):
         if self.is_connected():    
-            path= Path(value = path)
+            path = Path(value = path)
             #pdb.set_trace()
             fileData = self._stub.Read(path)
             return fileData.data

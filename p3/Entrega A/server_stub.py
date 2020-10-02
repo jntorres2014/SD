@@ -27,12 +27,10 @@ class StubFSServicer(FSServicer):
 
     def Read(self,request,context):
         print ('abriendo el archivo. si pude leo') 
-        print(request.value)
-        if self._adapter.open_file(request.value):
-            response = file_system_pb2.PathFiles()
-            archivo = self._adapter.read_file(request.value)
-            print(response)
-        return archivo.valor
+        #armo mi respuesta File Data
+        response = file_system_pb2.FileData()
+        response.data = self._adapter.read_file(request.value).encode()
+        return response
         try:
             pass
         except Exception as e:
