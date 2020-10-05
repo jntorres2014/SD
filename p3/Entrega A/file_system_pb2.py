@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11\x66ile_system.proto\"\x15\n\x04Path\x12\r\n\x05value\x18\x01 \x01(\t\"\x1b\n\tPathFiles\x12\x0e\n\x06values\x18\x02 \x03(\t\"\x18\n\x08\x46ileData\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x32\x42\n\x02\x46S\x12 \n\tListFiles\x12\x05.Path\x1a\n.PathFiles\"\x00\x12\x1a\n\x04Read\x12\x05.Path\x1a\t.FileData\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x11\x66ile_system.proto\"\x15\n\x04Path\x12\r\n\x05value\x18\x01 \x01(\t\"?\n\x08PathRead\x12\r\n\x05value\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\x05\x12\x14\n\x0cnumber_bytes\x18\x03 \x01(\x05\"\x1b\n\tPathFiles\x12\x0e\n\x06values\x18\x02 \x03(\t\"\x18\n\x08\x46ileData\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x32\x46\n\x02\x46S\x12 \n\tListFiles\x12\x05.Path\x1a\n.PathFiles\"\x00\x12\x1e\n\x04Read\x12\t.PathRead\x1a\t.FileData\"\x00\x62\x06proto3'
 )
 
 
@@ -57,6 +57,52 @@ _PATH = _descriptor.Descriptor(
 )
 
 
+_PATHREAD = _descriptor.Descriptor(
+  name='PathRead',
+  full_name='PathRead',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='PathRead.value', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='offset', full_name='PathRead.offset', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='number_bytes', full_name='PathRead.number_bytes', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=44,
+  serialized_end=107,
+)
+
+
 _PATHFILES = _descriptor.Descriptor(
   name='PathFiles',
   full_name='PathFiles',
@@ -84,8 +130,8 @@ _PATHFILES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=44,
-  serialized_end=71,
+  serialized_start=109,
+  serialized_end=136,
 )
 
 
@@ -116,11 +162,12 @@ _FILEDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=73,
-  serialized_end=97,
+  serialized_start=138,
+  serialized_end=162,
 )
 
 DESCRIPTOR.message_types_by_name['Path'] = _PATH
+DESCRIPTOR.message_types_by_name['PathRead'] = _PATHREAD
 DESCRIPTOR.message_types_by_name['PathFiles'] = _PATHFILES
 DESCRIPTOR.message_types_by_name['FileData'] = _FILEDATA
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -131,6 +178,13 @@ Path = _reflection.GeneratedProtocolMessageType('Path', (_message.Message,), {
   # @@protoc_insertion_point(class_scope:Path)
   })
 _sym_db.RegisterMessage(Path)
+
+PathRead = _reflection.GeneratedProtocolMessageType('PathRead', (_message.Message,), {
+  'DESCRIPTOR' : _PATHREAD,
+  '__module__' : 'file_system_pb2'
+  # @@protoc_insertion_point(class_scope:PathRead)
+  })
+_sym_db.RegisterMessage(PathRead)
 
 PathFiles = _reflection.GeneratedProtocolMessageType('PathFiles', (_message.Message,), {
   'DESCRIPTOR' : _PATHFILES,
@@ -155,8 +209,8 @@ _FS = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=99,
-  serialized_end=165,
+  serialized_start=164,
+  serialized_end=234,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListFiles',
@@ -173,7 +227,7 @@ _FS = _descriptor.ServiceDescriptor(
     full_name='FS.Read',
     index=1,
     containing_service=None,
-    input_type=_PATH,
+    input_type=_PATHREAD,
     output_type=_FILEDATA,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,

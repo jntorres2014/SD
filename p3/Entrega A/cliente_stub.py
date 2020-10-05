@@ -36,10 +36,11 @@ class Stub:
             return response.values
         return None
     
-    def read_file(self, path):
-        if self.is_connected():    
-            path = Path(value = path)
-            #pdb.set_trace()
-            fileData = self._stub.Read(path)
-            return fileData.data
-        return None
+	def read_file(self, path, offset, number_bytes):
+	    if self.is_connected():
+	      path = file_system_pb2.ReadPath(value=path, offset=offset, number_bytes=number_bytes)
+	      response = self.stub.read_file(path)
+	      return response.read_value
+	    else:
+	      return None
+

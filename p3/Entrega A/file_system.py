@@ -15,7 +15,7 @@ class FS:
         try:
             if path not in file_manager:
                 #import pdb; pdb.set_trace()
-                _file = open(path, 'r')
+                _file = open(path, 'rb')
                 file_manager[path] = _file
                 print('imprimo', file_manager)
             return True
@@ -39,7 +39,7 @@ class FS:
             if FS.open_file(path):
                 if path in file_manager:
                     print('el archivo tiene',file_manager[path])    
-                    data = file_manager[path].read()
+                    data = file_manager[path].read(300)
                     FS.close_file(path)
                     print('el archivo tiene',data)
                 return data
@@ -47,11 +47,21 @@ class FS:
             print('ERROR!!! ', e)
             return None
    
-    def read_file2(path):
-        print('entro al read',path)
-        archivo= os.open(path,'r')
-        import pdb; pdb.set_trace()
-        data= archivo.readline()
-        print (data)
-        #path.close()
-        return data
+
+     def read_file(path):
+	    _path = path.value
+	    _offset = path.offset
+	    _number_bytes = path.number_bytes
+	    try:
+	      if FS.open_file(_path):
+		_fd = FS.file_manager[_path]
+		_fd.seek(_offset)
+		data = _fd.read(_number_bytes)
+		print("AASDASDASDASDASDSAD")        
+		print(data)
+	      FS.close_file(_path)
+	      return data
+	    except Exception as e:
+	      print('error! FS read_file -> ', e)
+	      return None
+

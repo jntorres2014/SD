@@ -21,7 +21,7 @@ class FSStub(object):
                 )
         self.Read = channel.unary_unary(
                 '/FS/Read',
-                request_serializer=file__system__pb2.Path.SerializeToString,
+                request_serializer=file__system__pb2.PathRead.SerializeToString,
                 response_deserializer=file__system__pb2.FileData.FromString,
                 )
 
@@ -51,7 +51,7 @@ def add_FSServicer_to_server(servicer, server):
             ),
             'Read': grpc.unary_unary_rpc_method_handler(
                     servicer.Read,
-                    request_deserializer=file__system__pb2.Path.FromString,
+                    request_deserializer=file__system__pb2.PathRead.FromString,
                     response_serializer=file__system__pb2.FileData.SerializeToString,
             ),
     }
@@ -93,7 +93,7 @@ class FS(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/FS/Read',
-            file__system__pb2.Path.SerializeToString,
+            file__system__pb2.PathRead.SerializeToString,
             file__system__pb2.FileData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

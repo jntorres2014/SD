@@ -9,9 +9,12 @@ def main():
     #pdb.set_trace()
     #respuesta = cliente.listar_archivos('.')
     #print(respuesta)
-    archivo=cliente.leer_archivo('prueba.txt')
+    #archivo=cliente.leer_archivo('prueba.mp4')
+    archivo=cliente.leer_archivo2('prueba.pdf')
+
     #pdb.set_trace()
-    print(archivo.decode())
+    print('llegue a la salida')
+    print(archivo)
     #cliente.leer_archivo(archivo)
 
 if __name__ == '__main__':

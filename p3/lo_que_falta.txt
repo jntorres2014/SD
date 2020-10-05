@@ -1,9 +1,2 @@
-En A prima esta la integracion
-
-no anda el server y el cliente.
-en cliente_stub agregue read close y open
-pero no se de donde los llamo para que anden o probarlos.
-Agregue al .proto los servicios (no se si estan bien)
-y ahi me quede.
-falta lo de leer
-
+En el 3b
+falta el stub de cliente y servidor
