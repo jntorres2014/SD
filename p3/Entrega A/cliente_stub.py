@@ -1,6 +1,6 @@
 import grpc
 import pdb
-from file_system_pb2 import Path
+from file_system_pb2 import Path, PathRead
 from file_system_pb2_grpc import FSStub
 
 file_manager = {}
@@ -36,11 +36,20 @@ class Stub:
             return response.values
         return None
     
-	def read_file(self, path, offset, number_bytes):
-	    if self.is_connected():
-	      path = file_system_pb2.ReadPath(value=path, offset=offset, number_bytes=number_bytes)
-	      response = self.stub.read_file(path)
-	      return response.read_value
-	    else:
-	      return None
+    def read_file2(self, path):
+        if self.is_connected():    
+            path = Path(value = path)
+            print('paso')
+            fileData = self._stub.Read(path)
+            return fileData.data
+        return None
+
+    def read_file(self, path, offset, number_bytes):
+        if self.is_connected():
+            #Armo mi paquete PathRead que me pide gRPC
+            path = PathRead(value=path, offset=offset, number_bytes=number_bytes)
+            response = self._stub.Read(path)
+            return response.data
+        else:
+            return None
 

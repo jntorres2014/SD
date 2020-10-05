@@ -26,29 +26,16 @@ class StubFSServicer(FSServicer):
         return response
 
     def Read(self,request,context):
-        #print ('abriendo el archivo. si pude leo') 
+        #print ('En READ') 
         #armo mi respuesta File Data
         response = file_system_pb2.FileData()
-        response.data = self._adapter.read_file(request.value)
-        pdb.set_trace()
-        print('paso',type(response.data))
+        response.data= self._adapter.read_file(request)
         return response
         try:
             pass
         except Exception as e:
             print('ERRR En server read file ', e)
         return None
-
-	def read_file(self, request, context):
-	    response = file_system_pb2.ReadValue()
-	    print(response)
-	    print(request)
-	    try:
-	      _value = FS.read_file(request)
-	      response.read_value = _value
-	    except Exception as e:
-	      print('ERROR -> -server- read file ', e)
-	    return response
 
     
 class Stub:
@@ -65,11 +52,8 @@ class Stub:
 
 
     def run(self):
-        #pdb.set_trace()
         self._setup()
-
-        self.server.start()
-        #pdb.set_trace() 
+        self.server.start() 
         try:
             while True:
                 time.sleep(86400)

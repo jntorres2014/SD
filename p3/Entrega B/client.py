@@ -30,20 +30,4 @@ class Client:
     def leer_archivo(self,path):
         return self.adapter.read_file(path)
 
-    def leer_archivo2(self, path):
-        offset = 0
-        number_bytes = 4096
-        Leyendo = True
-        try:
-            with open('salida', 'wb') as archivo:
-                while Leyendo:
-                    data = self.adapter.read_file(path, offset, number_bytes)
-                    offset = offset + len(data)
-                    if not (offset%number_bytes==0) :
-                        Leyendo = False
-                    archivo.write(data)
-                    print('offset', round(offset/(1024*1024),2),'MB')
-        except Exception as e:
-            print('ERROR -> -client- read file ', e)
-                
-            return ('')
+

@@ -31,39 +31,19 @@ class Client:
         return self.adapter.read_file(path)
 
     def leer_archivo2(self, path):
-        offset= 0
-        cant_bytes= 1024
-        leyendo = True
-        while offset < cant_bytes:
-            with open(path,'wb') as archivo:
+        offset = 0
+        number_bytes = 4096
+        Leyendo = True
+        try:
+            with open('salida', 'wb') as archivo:
+                while Leyendo:
+                    data = self.adapter.read_file(path, offset, number_bytes)
+                    offset = offset + len(data)
+                    if not (offset%number_bytes==0) :
+                        Leyendo = False
+                    archivo.write(data)
+                    print('offset', round(offset/(1024*1024),2),'MB')
+        except Exception as e:
+            print('ERROR -> -client- read file ', e)
                 
-                data = self.adapter.read_file(archivo)
-                respuesta += data
-                offset = len(data)
-                archivo.write(data)
-                leyendo = offset == cant_bytes
-        return respuesta
-
-	def read_file(self, path):
-	    print('reading')
-	    offset = 0
-	    number_bytes = 512
-	    eof = False
-	    try:
-	      print('abriendo salida.txt')
-	      with open('salida', 'wb') as archivo:
-		print('salida.txt opened')
-		while not eof:
-		  data = self.adapter.read_file(path, offset, number_bytes)
-		  print(data)
-		  offset = offset + len(data)
-		  if not (offset%number_bytes == 0):
-		    eof = True
-		  archivo.write(data)
-		  print('still reading')
-	    except Exception as e:
-	      print('ERROR -> -client- read file ', e)
-		
-	    return ('check the ouput file in this directory')
-
-
+            return ('')

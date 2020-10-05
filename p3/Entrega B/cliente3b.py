@@ -6,14 +6,13 @@ def main():
     stub = Stub('localhost', '50051')
     cliente = Client(stub)
     cliente.conectar()
-    #Texto
-    cliente.leer_archivo2('prueba.txt')
-    #PDF
-    #cliente.leer_archivo2('prueba')
-    #Video
-    #cliente.leer_archivo2('prueba2')
     #pdb.set_trace()
-    print('Lectura completa.')
+    #respuesta = cliente.listar_archivos('.')
+    #print(respuesta)
+    archivo=cliente.leer_archivo('prueba.txt')
+    #pdb.set_trace()
+    print(archivo.decode())
+    #cliente.leer_archivo(archivo)
 
 if __name__ == '__main__':
     main()
