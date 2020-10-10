@@ -1,5 +1,6 @@
 import socket
-import pickle
+import pickle 
+import pdb
 from structures import Path
 
 class FSStub:
@@ -10,24 +11,26 @@ class FSStub:
         self._process_request()
 
     def _process_request(self):
-        print('entro a leer')
-        data = self._channel.recv(4096)
-        #import pdb; pdb.set_trace()
+        print('-----envio desde el cliente-----')
+        data = self._channel.recv(1024)
+        print('-----envio desde el cliente-----')
         operacion = pickle.loads(data)
-        print('Entroooooooo!!!!')
+        print(operacion)
         if operacion['operacion'] == 1:
-                print('entro3')
-                path_files = self._adapter.list_files(operacion['value'])
-                entrega = { 'value': path_files}
-                request= pickle.dumps(entrega)
-                self._channel.send(request)
-        if  operacion['operacion'] == 2:
+            print('entro3')
+            path_files = self._adapter.list_files(operacion['value'])
+            entrega = { 'value': path_files}
+            request= pickle.dumps(entrega)
+            self._channel.send(request)
+        elif operacion['operacion'] == 2:
+            #pdb.set_trace()
             print('Entro!!!!!! READ')
             read_file = self._adapter.read_file(operacion)
             entrega = { 'value': read_file}
             request= pickle.dumps(entrega)
-            self._channel.send(request)
-            print ('salio')                
+            self._channel.sendall(request)
+            print('-----respuesta del servidor-----')
+            print (request)                
         return 0
         #else: 
         #    return 1

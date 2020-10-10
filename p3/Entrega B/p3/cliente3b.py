@@ -8,6 +8,6 @@ def main():
     #respuesta = cliente.listar_archivos('.')
     #print(respuesta)
     cliente.leer_archivo('prueba.txt')
-    print('salio')
+    print('Termino bien')
 if __name__ == '__main__':
     main()

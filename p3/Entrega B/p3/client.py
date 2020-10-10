@@ -32,6 +32,7 @@ class Client:
                     if not (offset%number_bytes==0) :
                         Leyendo = False
                     archivo.write(data)
+                    print('data')
                     print('offset', round(offset/(1024*1024),2),'MB')
         except Exception as e:
             print('ERROR -> -client- read file ', e)

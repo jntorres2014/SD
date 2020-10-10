@@ -16,9 +16,9 @@ class FSStub:
         print('entro')
         paquete = { 'value': path, 'operacion': 1}
         objeto_a_enviar = pickle.dumps(paquete)
-        self._channel.send(objeto_a_enviar)
+        self._channel.sendall(objeto_a_enviar)
         list_files = []
-        lista= self._channel.recv(4096)
+        lista= self._channel.recv(1024)
         lista2=pickle.loads(lista)
         for i in lista2['value']:
             print(i)
@@ -26,10 +26,13 @@ class FSStub:
         return list_files
 
     def Read(self,path):
-        self._channel.send(path)
-        print('paro 1')
-        request = self._channel.recv(4096)
-        print('paso 1')
+        print('-----envio desde el cliente----')
+        print(path)
+        self._channel.sendall(path)
+        request = self._channel.recv(1024)
+        #pdb.set_trace()
+        print("---respuesta del servidor-----")
+        print(request)
         return request
 
     def list_files2(self, path):
@@ -81,6 +84,7 @@ class Stub:
     def read_file(self,path, offset, number_bytes):
         if self.is_connected():
             paquete = { 'value': path, 'offset': offset, 'number_bytes': number_bytes, 'operacion':2}
+            print(paquete)
             objeto_a_enviar = pickle.dumps(paquete)
             #import pdb; pdb.set_trace()
             respuesta= self._stub.Read(objeto_a_enviar)
